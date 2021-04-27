@@ -112,6 +112,12 @@ p {
   font-weight: var(--fw-medium);
 }
 
+.btn:hover {
+  transform: translateY(-.5rem);
+  transition: transform .2s ease-in-out;
+  opacity: .8;
+}
+
 .container {
     padding: 2.5rem 2rem;
   }

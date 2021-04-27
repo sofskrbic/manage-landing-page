@@ -29,17 +29,56 @@
           </div>
       </div>
       <div class="right">
-        <input type="email" id="email-form" placeholder="Updates in your inbox...">
-        <div class="btn"><span>Go</span></div>
+        <input type="email" id="email-form" v-model="inputEmail" placeholder="Updates in your inbox...">
+        <div class="btn" @click="validateNewsletterForm"><span>Go</span></div>
       </div>
     </div>
     <span class="copyright">Copyright 2020. All Rights Reserved</span>
+    <ErrorModal v-show="getError" @closeModal="resetForm" id="modal"/>
   </div>
 </template>
 
 <script>
+import ErrorModal from './ErrorModal'
 export default {
-  name: 'AppFooter'
+  name: 'AppFooter',
+  components: {
+    ErrorModal
+  },
+  data(){
+    return {
+      inputEmail: '',
+      error: false
+    }
+  },
+  computed: {
+    getError() {
+      return this.error
+    }
+  },
+  methods: {
+    validateEmail() {
+      const re = /^[^\s@]+@[^\s@]+$/;
+      return re.test(String(this.inputEmail).toLowerCase());
+    },
+    validateNewsletterForm() {
+      if(this.inputEmail == '' || !this.validateEmail()){
+        this.error = true
+        this.scrollToBottom()
+        return
+      }
+      this.resetForm()
+      return
+    },
+    resetForm() {
+      this.error = false
+      this.inputEmail = ''
+      document.getElementById('email-form').value = ''
+    },
+    scrollToBottom(){
+      this.$nextTick(document.getElementById('modal').scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"}))
+    }
+  }
 }
 </script>
 
@@ -47,6 +86,7 @@ export default {
   .container {
     background: var(--neutral-dark-blue);
     padding-bottom: 1.5rem;
+    position: relative;
   }
 
   .split {
@@ -78,6 +118,11 @@ export default {
     margin-right: 2rem;
   }
 
+  .social-media img:hover {
+    cursor: pointer;
+    filter: invert(.175) sepia(.85) hue-rotate(300deg) saturate(29) ;
+  }
+
   .social-media img:last-child {
     margin-right: 0;
   }
@@ -103,6 +148,11 @@ export default {
     opacity: .8;
   }
 
+  .middle li:hover {
+    border-bottom: 1px solid var(--primary-red);
+    transition: border-bottom .5s ease-out;
+  }
+
   .middle li {
     padding-block: .5rem;
   }
@@ -120,6 +170,10 @@ export default {
     flex-basis: 80%;
     margin-right: .5rem;
     font-family: var(--ff-default);
+  }
+
+  input:focus {
+    outline: 2px solid var(--primary-red);
   }
 
   .btn {

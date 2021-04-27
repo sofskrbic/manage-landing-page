@@ -6,11 +6,15 @@
         :id="testimonial.id"
         :img="testimonial.img"
         :fullName="testimonial.fullName"
-        :testimonialText="testimonial.testimonialText"/>
+        :testimonialText="testimonial.testimonialText"
+        v-show="selectedTestimonial === testimonial.id"
+        />
     </div>
     <div class="pagination">
       <span class="dot" v-for="item in testimonials" :key="item.id"
-        :class="{active: currentIndex == item.id}"></span>
+        :class="{active: selectedTestimonial == item.id}"
+        @click="selectSlide(item.id)">
+      </span>
     </div>
     <div class="btn"><span>Get Started</span></div>
   </div>
@@ -51,11 +55,18 @@ export default {
           testimonialText: '“Their software allows us to track, manage and collaborate on our projects from anywhere. It keeps the whole team in-sync without being intrusive.”'
         }
       ],
-      currentIndex: 0
+      currentIndex: 0,
     }
   }, 
   methods: {
-
+    selectSlide(id) {
+      this.currentIndex = id
+    }
+  },
+  computed: {
+    selectedTestimonial() {
+      return this.currentIndex
+    }
   }
 }
 </script>
@@ -112,6 +123,12 @@ export default {
     border-color: var(--primary-red);
     margin-right: .8rem;
     display: inline-block;
+    cursor: pointer;
+  }
+
+  .dot:hover {
+    transform: translateY(-.2rem);
+    transition: transform .1s ease-in-out;
   }
 
   .dot.active {
