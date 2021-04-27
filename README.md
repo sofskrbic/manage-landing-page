@@ -34,7 +34,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
+- Solution URL: [FrontendMentor](https://www.frontendmentor.io/solutions/vuejs-manage-landing-page-with-horizontal-scroller-8P5NUYzk-)
 - Live Site URL: [GitHub Pages](https://sofskrbic.github.io/manage-landing-page/)
 
 ## My process
