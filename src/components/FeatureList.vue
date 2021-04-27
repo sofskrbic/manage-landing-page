@@ -45,4 +45,10 @@ export default {
     padding-inline: 0;
     padding-block: .5rem;
   }
+
+  @media (min-width: 1440px) {
+    .container {
+      padding-block: 0;
+    }
+  }
 </style>

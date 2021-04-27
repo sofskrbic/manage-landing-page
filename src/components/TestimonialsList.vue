@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h2 class="heading">What they've said</h2>
-    <div class="testimonials">
+    <div class="testimonials" v-show="!desktopView">
       <Testimonial class="testimonial" v-for="testimonial in testimonials" :key="testimonial.id"
         :id="testimonial.id"
         :img="testimonial.img"
@@ -10,7 +10,17 @@
         v-show="selectedTestimonial === testimonial.id"
         />
     </div>
-    <div class="pagination">
+    <div class="h-scroll" v-show="desktopView">
+      <div class="testimonials-desktop" id="desktop-list" @mousemove="scrollTestimonials">
+        <Testimonial class="testimonial-desktop" v-for="testimonial in testimonials" :key="testimonial.id"
+          :id="testimonial.id"
+          :img="testimonial.img"
+          :fullName="testimonial.fullName"
+          :testimonialText="testimonial.testimonialText"
+          />
+      </div>
+    </div>
+    <div class="pagination" v-show="!desktopView">
       <span class="dot" v-for="item in testimonials" :key="item.id"
         :class="{active: selectedTestimonial == item.id}"
         @click="selectSlide(item.id)">
@@ -56,17 +66,47 @@ export default {
         }
       ],
       currentIndex: 0,
+      windowSize: window.innerWidth
     }
   }, 
   methods: {
     selectSlide(id) {
       this.currentIndex = id
+    },
+    scrollTestimonials(event) {
+      var hider = document.getElementById('desktop-list')
+      var mousePositionX = event.clientX - this.$el.scrollLeft
+      var delta = 2000 - this.getWindowWidth
+      var percent = 100 / this.getWindowWidth * mousePositionX
+      var offset = -1 * delta / 100 * percent
+      hider.style.marginLeft = `${offset}px`
+    },
+    windowListener() {
+      window.addEventListener('resize', ()=>{
+        this.windowSize = window.innerWidth
+      })
     }
   },
   computed: {
     selectedTestimonial() {
       return this.currentIndex
+    },
+    desktopView() {
+      if(this.getWindowWidth >= 1440) {
+        return true
+      }
+      return false
+    },
+    getWindowWidth() {
+      return this.windowSize
     }
+  },
+  updated() {
+    this.windowListener()
+  },
+  created() {
+    this.windowListener()
+    this.isOpen = false
   }
 }
 </script>
@@ -88,11 +128,9 @@ export default {
     display: inline-flex;
     transform: translateX(0);
     transition: transform 0.3s ease-out;
-    cursor: grab;
   }
 
   .testimonial {
-    max-height: 100%;
     width: 90vw;
     display: flex;
     flex-direction: column;
@@ -100,14 +138,7 @@ export default {
     justify-content: center;
     padding: 2rem;
     user-select: none;
-  }
-
-  .grabbing {
-    cursor: grabbing;
-  }
-
-  .grabbing .testimonial {
-    transform: scale(.9);
+    background-color: var(--neutral-light-gray);
   }
 
   .pagination {
@@ -139,5 +170,55 @@ export default {
   .btn {
     margin-inline: auto;
     margin-top: 2rem;
+  }
+
+  @media (min-width: 1440px) {
+    .container {
+      padding-inline: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: transparent;
+    }
+
+    .heading {
+      font-size: 2.3rem;
+    }
+
+    .pagination {
+      display: none;
+    }
+
+    .btn {
+      width: 10%;
+    }
+
+    .h-scroll {
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .testimonials-desktop {
+      /* display: flex;
+      flex-direction: row;
+      flex-grow: 1;
+      justify-content: start;
+      align-items: flex-start;
+      margin: 0;
+      padding-inline: 0;
+      */
+      display: flex;
+      width: 2000px;
+      overflow: hidden;
+      padding-block: 3rem;
+      float: left;
+    }
+
+    .testimonial-desktop {
+      margin-inline: 1rem;
+      padding: 2rem;
+      user-select: none;
+      background-color: var(--neutral-light-gray);
+    }
   }
 </style>

@@ -3,7 +3,7 @@
     <div class="split">
       <div class="left">
         <h2 class="heading">What's different about Manage?</h2>
-        <p>Manage provides all the functionality your team needs, without 
+        <p class="subheading">Manage provides all the functionality your team needs, without 
            the complexity. Our software is tailor-made for modern digital 
            product teams.
         </p>
@@ -38,5 +38,30 @@ export default {
   p {
     text-align: center;
     margin-bottom: 2rem;
+  }
+
+  @media (min-width: 1440px) {
+    .container {
+      padding-inline: 8rem;
+    }
+
+    .split {
+      display: flex;
+      flex-direction: row;
+    }
+
+    p {
+      text-align: start;
+    }
+
+    .heading {
+      margin-bottom: 1rem;
+      font-size: 2.3rem;
+      line-height: 1;
+    }
+
+    .subheading {
+      width: 75%;
+    }
   }
 </style>

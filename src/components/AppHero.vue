@@ -47,4 +47,36 @@ export default {
     margin-top: 2rem;
     margin-inline: auto;
   }
+
+  @media (min-width: 1440px) {
+    .container {
+      padding-block: 2rem;
+    }
+
+    .split {
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .illustration {
+      flex-basis: 45%;
+    }
+
+    .hero-content {
+      flex-basis: 50%;
+      padding-right: 2rem;
+      margin-right: 2rem;
+      text-align: start;
+    }
+
+    .heading {
+      font-size: 3.5rem;
+      line-height: 1.2;
+    }
+
+    .btn {
+      margin-inline: unset;
+      width: 30%;
+    }
+  }
 </style>

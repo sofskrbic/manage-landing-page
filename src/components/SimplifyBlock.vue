@@ -38,4 +38,27 @@ export default {
     margin-inline: auto;
   }
 
+  @media (min-width: 1440px) {
+    .container {
+      background: url(../assets/bg-simplify-section-desktop.svg) no-repeat bottom left 15rem, var(--primary-red);
+      background-size: cover;
+      padding-inline: 8rem;
+      height: 25vh;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    h2 {
+      font-size: 2.3rem;
+      flex-basis: 40%;
+      text-align: start;
+    }
+
+    .btn {
+      margin-inline: unset;
+      flex-basis: 15%;
+    }
+  }
+
 </style>

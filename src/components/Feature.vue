@@ -30,6 +30,8 @@ export default {
     padding-inline: 0;
     margin-bottom: 1rem;
     padding-block: 1rem;
+    display: flex;
+    flex-direction: column;
   }
 
   .heading {
@@ -49,5 +51,27 @@ export default {
     padding: .5rem 1.1rem;
     border-radius: 50px;
     margin-right: .8rem;
+  }
+
+  @media (min-width: 1440px) {
+    .container {
+      padding-block: 0;
+      margin-bottom: 2rem;
+    }
+
+    .heading {
+      background-color: transparent;
+      margin-bottom: .5rem;
+      width: 100%;
+    }
+
+    .heading::before {
+      margin-right: 1.5rem;
+    }
+
+    .desc {
+      margin-left: 5rem;
+      width: 100%;
+    }
   }
 </style>

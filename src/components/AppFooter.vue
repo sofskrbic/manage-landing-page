@@ -30,11 +30,12 @@
       </div>
       <div class="right">
         <input type="email" id="email-form" v-model="inputEmail" placeholder="Updates in your inbox...">
-        <div class="btn" @click="validateNewsletterForm"><span>Go</span></div>
+        <label v-show="desktopView && getError" class="error">Please insert a valid email</label>
+        <div class="btn" @click="validateNewsletterForm" :class="{disabled: getError}"><span>Go</span></div>
       </div>
     </div>
     <span class="copyright">Copyright 2020. All Rights Reserved</span>
-    <ErrorModal v-show="getError" @closeModal="resetForm" id="modal"/>
+    <ErrorModal v-show="getError && !desktopView" @closeModal="resetForm" id="modal"/>
   </div>
 </template>
 
@@ -54,6 +55,13 @@ export default {
   computed: {
     getError() {
       return this.error
+    },
+    desktopView() {
+      let windowSize = window.innerWidth
+      if(windowSize >= 1440) {
+        return true
+      }
+      return false
     }
   },
   methods: {
@@ -65,6 +73,12 @@ export default {
       if(this.inputEmail == '' || !this.validateEmail()){
         this.error = true
         this.scrollToBottom()
+        if(this.desktopView){
+          setTimeout(() => {
+            this.resetForm()
+            this.error = false
+          }, 2000)
+        }
         return
       }
       this.resetForm()
@@ -182,6 +196,16 @@ export default {
     width: unset;
   }
 
+  .btn:hover {
+    transform: unset;
+  }
+
+  .btn.disabled {
+    cursor: not-allowed;
+    background-color: var(--neutral-gray-blue);
+    opacity: .6;
+  }
+
   .copyright {
     color: var(--neutral-light-gray);
     opacity: .3;
@@ -190,5 +214,83 @@ export default {
     display: flex;
     justify-content: center;
     margin-top: 2rem;
+  }
+
+  @media (min-width: 1440px) {
+    .container {
+      background: var(--neutral-dark-blue);
+      padding-bottom: 4rem;
+      position: relative;
+    }
+
+    .split {
+      flex-direction: row;
+    }
+
+    .left {
+      flex-direction: column;
+      flex-basis: 25%;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .middle, .right {
+      flex-basis: 33.3%;
+    }
+
+    .logo {
+      margin-inline: unset;
+      margin-top: 0;
+      width: 70%;
+    }
+
+    .social-media {
+      margin-bottom: 0rem;
+    }
+
+    .social-media img {
+      min-width: 15%;
+      margin-right: 1.1rem;
+    }
+
+    .social-media img:first-child {
+      margin-left: 1rem;
+    }
+
+    .middle {
+      margin-block: 0rem;
+    }
+
+    .right {
+      margin-bottom: auto;
+      justify-content: flex-end;
+      position: relative;
+    }
+
+    input {
+      flex-basis: 50%;
+    }
+
+    label {
+      position: absolute;
+      top: 3.5rem;
+      left: 7.5rem;
+    }
+
+    .btn {
+      box-shadow: unset;
+      padding: .8rem 1.5rem;
+      width: unset;
+    }
+
+    .copyright {
+      justify-content: flex-end;
+      margin-top: -2rem;
+    }
+
+    .error {
+      font-size: .7rem;
+      color: var(--primary-red);
+    }
   }
 </style>

@@ -1,10 +1,13 @@
 <template>
   <div id="app">
-    <div class="hero">
-      <AppHeader/>
-      <AppHero/>
+    <Overlay :menu="getMenuState" />
+    <div class="second-bg">
+      <div class="hero">
+        <AppHeader @menuAction="menu = !menu"/>
+        <AppHero/>
+      </div>
+      <AboutManage/>
     </div>
-    <AboutManage/>
     <TestimonialsList/>
     <SimplifyBlock/>
     <AppFooter/>
@@ -18,6 +21,7 @@ import AboutManage from './components/AboutManage'
 import TestimonialsList from './components/TestimonialsList'
 import SimplifyBlock from './components/SimplifyBlock'
 import AppFooter from './components/AppFooter'
+import Overlay from './components/Overlay'
 
 export default {
   name: 'App',
@@ -27,7 +31,18 @@ export default {
     AboutManage,
     TestimonialsList,
     SimplifyBlock,
-    AppFooter
+    AppFooter,
+    Overlay
+  },
+  data() {
+    return {
+      menu: false
+    }
+  },
+  computed: {
+    getMenuState() {
+      return this.menu
+    }
   }
 }
 </script>
@@ -67,7 +82,7 @@ export default {
 body {
   height: 100vh;
   width: 100%;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
   font-size: var(--fs-body-copy);
   font-family: var(--ff-defaul);
   font-weight: var(--fw-regular);
@@ -125,5 +140,30 @@ p {
 .hero {
   background: url(./assets/bg-tablet-pattern.svg) no-repeat top -7rem left 5rem;
   background-size: 120%;
+}
+
+.second-bg {
+  background: url(./assets/bg-tablet-pattern.svg) no-repeat top 28rem left 15rem;
+  background-size: 100%;
+}
+
+@media (min-width: 1440px) {
+  .container {
+    padding: 4rem 8rem;
+  }
+
+  .heading {
+    color: var(--primary-blue);
+    text-align: start;
+  }
+  .hero {
+    background: url(./assets/bg-tablet-pattern.svg) no-repeat top -7rem right -5rem;
+    background-size: contain;
+  }
+
+  .second-bg {
+    background: url(./assets/bg-tablet-pattern.svg) no-repeat bottom -18rem left -25rem;
+    background-size: 50%;
+  }
 }
 </style>

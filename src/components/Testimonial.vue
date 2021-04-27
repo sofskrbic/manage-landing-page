@@ -37,9 +37,10 @@ export default {
 
 <style scoped>
   .container {
-    background: var(--neutral-light-gray);
+    background-color: var(--neutral-light-gray);
     padding-inline: 1rem;
     display: flex;
+    width: 80%;
     flex-direction: column;
     margin-bottom: 1rem;
   }
@@ -52,5 +53,24 @@ export default {
 
   p {
     text-align: center;
+  }
+
+  @media (min-width: 1440px) {
+    .container {
+      padding-inline: 1.5rem;
+      background-color: var(--neutral-light-gray);
+      max-width: 30%;
+    }
+
+    .profile {
+      width: 18%;
+      margin-inline: auto;
+      margin-top: -5rem;
+      margin-bottom: 1rem;
+    }
+
+    .heading {
+      margin-bottom: 1rem;
+    }
   }
 </style>

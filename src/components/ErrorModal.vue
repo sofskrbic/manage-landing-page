@@ -25,7 +25,7 @@ export default {
     padding: 1.5rem 2rem;
     margin-inline: .2rem;
     transform: translateY(-20rem);
-    background: var(--neutral-pale-red);
+    background: var(--primary-red);
     left: 5%;
     right: 5%;
     transition: transform cubic-bezier(0.785, 0.135, 0.15, 0.86) ease-in-out;
@@ -47,9 +47,16 @@ export default {
   .split img {
     flex-basis: 10%;
     height: 100%;
+    filter: invert(1) sepia(1) saturate(.1);
+  }
+
+  h3 {
+    color: var(--neutral-light-gray);
   }
 
   p {
     font-size: .875rem;
+    color: var(--neutral-light-gray);
+    opacity: .7;
   }
 </style>
