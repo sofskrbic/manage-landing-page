@@ -9,7 +9,7 @@
         </p>
         <div class="btn"><span>Get Started</span></div>
       </div>
-      <img src="@/assets/illustration-intro.svg" alt="Three statistical charts" class="illustration">
+      <img src="../assets/illustration-intro.svg" alt="Three statistical charts" class="illustration">
     </div>
   </div>
 </template>
@@ -77,6 +77,16 @@ export default {
     .btn {
       margin-inline: unset;
       width: 30%;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1440px) {
+    .hero-content {
+      padding-inline: 1rem;
+    }
+
+    .hero-content p {
+      padding-inline: 3rem;
     }
   }
 </style>
