@@ -2,13 +2,13 @@
   <div class="container">
     <div class="split">
       <div class="left">
-        <img src="@/assets/logo-white.svg" alt="Manage logo" class="logo">
+        <img src="../assets/logo-white.svg" alt="Manage logo" class="logo">
         <div class="social-media">
-          <img src="@/assets/icon-facebook.svg" alt="Facebook icon">
-          <img src="@/assets/icon-youtube.svg" alt="Youtube icon">
-          <img src="@/assets/icon-twitter.svg" alt="Twitter icon">
-          <img src="@/assets/icon-pinterest.svg" alt="Pinterest icon">
-          <img src="@/assets/icon-instagram.svg" alt="Instagram icon">
+          <img src="../assets/icon-facebook.svg" alt="Facebook icon">
+          <img src="../assets/icon-youtube.svg" alt="Youtube icon">
+          <img src="../assets/icon-twitter.svg" alt="Twitter icon">
+          <img src="../assets/icon-pinterest.svg" alt="Pinterest icon">
+          <img src="../assets/icon-instagram.svg" alt="Instagram icon">
         </div>
       </div>
       <div class="middle">
@@ -246,6 +246,7 @@ export default {
 
     .social-media {
       margin-bottom: 0rem;
+      margin-inline: unset;
     }
 
     .social-media img {
@@ -291,6 +292,39 @@ export default {
     .error {
       font-size: .7rem;
       color: var(--primary-red);
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1440px) {
+    .container {
+      padding-inline: 4rem;
+    }
+
+    .logo {
+      width: 30%;
+    }
+
+    .social-media {
+      width: 50%;
+      margin-inline: auto;
+    }
+
+    .middle{
+      padding-inline: 10rem;
+    }
+
+    .right {
+      margin-inline: auto;
+    }
+
+    input {
+      border-radius: 50px;
+      border: none;
+      background-color: var(--neutral-light-gray);
+      padding-inline: 2rem;
+      flex-basis: 70%;
+      margin-right: .5rem;
+      font-family: var(--ff-default);
     }
   }
 </style>
