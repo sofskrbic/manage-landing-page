@@ -1,17 +1,17 @@
 <template>
   <div class="container">
     <div class="split">
-      <img src="@/assets/logo.svg" alt="Manage logo" class="logo">
+      <img src="../assets/logo.svg" alt="Manage logo" class="logo">
       <div class="navigation">
-        <img src="@/assets/icon-close.svg" v-show="menuOpen"
+        <img src="../assets/icon-close.svg" v-show="menuOpen"
          alt="Menu close icon" 
          id="close-icon"
          @click="toggleMenu">
-        <img src="@/assets/icon-hamburger.svg" v-show="!menuOpen"
+        <img src="../assets/icon-hamburger.svg" v-show="!menuOpen"
          alt="Menu icon"
          id="menu-icon"
          @click="toggleMenu">
-        <nav v-show="menuOpen || desktopView">
+        <nav v-show="isOpen || desktop">
           <ul class="navigation-links">
             <li><a href="#">Pricing</a></li>
             <li><a href="#">Product</a></li>
@@ -27,26 +27,21 @@
 </template>
 
 <script>
+
 export default {
   name: 'AppHeader',
   data() {
     return {
       isOpen: false,
-      windowSize: window.innerWidth
+      desktop: false
     }
   },
   computed: {
     menuOpen() {
       return this.isOpen
     },
-    getWindowSize(){
-      return this.windowSize
-    },
     desktopView() {
-      if(this.getWindowSize >= 1440) {
-        return true
-      }
-      return false
+      return this.desktop
     }
   },
   methods: {
@@ -54,17 +49,22 @@ export default {
       this.isOpen = !this.isOpen
       this.$emit('menuAction', this.isOpen)
     },
-    windowListener() {
-      window.addEventListener('resize', ()=>{
-        this.windowSize = window.innerWidth
-        if(this.getWindowSize < 1440) {
-          this.isOpen = false
-        }
-      })
+    handleResize() {
+      if(window.innerWidth >= 1440){
+        this.isOpen = false
+        this.desktop = true
+      } else {
+        this.isOpen = false
+        this.desktop = false
+      }
     }
   },
-  updated() {
-    this.windowListener()
+  created() {
+    window.addEventListener('resize', this.handleResize)
+    this.handleResize()
+  },
+  destroyed() {
+    window.removeEventListener('resize', this.handleResize)
   }
 }
 </script>
@@ -175,6 +175,24 @@ export default {
     .logo {
       flex-basis: 15%;
       align-self: center;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1440px) {
+    .container {
+      padding: 2.5rem 3rem;
+    }
+
+    #menu-icon {
+      height: 60%;
+    }
+
+    .logo {
+      flex-basis: 25%;
+    }
+
+    nav {
+      top: 6rem;
     }
   }
 </style>
