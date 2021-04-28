@@ -5,7 +5,7 @@
         <h3>Oh, no!</h3>
         <p>Please, make sure to enter a valid email adress.</p>
       </div>
-      <img src="@/assets/icon-close.svg" alt="X close icon" 
+      <img src="../assets/icon-close.svg" alt="X close icon" 
       class="close"
       @click="$emit('closeModal')">
     </div>
@@ -28,7 +28,7 @@ export default {
     background: var(--primary-red);
     left: 5%;
     right: 5%;
-    transition: transform cubic-bezier(0.785, 0.135, 0.15, 0.86) ease-in-out;
+    transition: transform .5s ease-out;
   }
 
   .close {
@@ -58,5 +58,19 @@ export default {
     font-size: .875rem;
     color: var(--neutral-light-gray);
     opacity: .7;
+  }
+
+  @media (min-width: 768px) and (max-width: 1440px) {
+    .split img {
+      flex-basis: 4%;
+    }
+
+    .container-modal {
+      left: 10%;
+      right: 10%;
+      box-shadow: 0 1px 3px var(--neutral-gray-blue);
+      bottom: -2rem;
+      transition: bottom .5s ease-out;
+    }
   }
 </style>
