@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <img :src="require(`@/assets/${img}`)" class="profile" alt="Profile picture">
+    <img :src="require(`../assets/${img}`)" class="profile" alt="Profile picture">
     <h3 class="heading">{{fullName}}</h3>
     <p>{{testimonialText}}</p>
   </div>
@@ -67,6 +67,18 @@ export default {
       margin-inline: auto;
       margin-top: -5rem;
       margin-bottom: 1rem;
+    }
+
+    .heading {
+      margin-bottom: 1rem;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1440px) {
+    .profile {
+      width: 15%;
+      margin-top: -5.2rem;
+      margin-bottom: 1.5rem;
     }
 
     .heading {
