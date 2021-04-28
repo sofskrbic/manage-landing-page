@@ -199,14 +199,6 @@ export default {
     }
 
     .testimonials-desktop {
-      /* display: flex;
-      flex-direction: row;
-      flex-grow: 1;
-      justify-content: start;
-      align-items: flex-start;
-      margin: 0;
-      padding-inline: 0;
-      */
       display: flex;
       width: 2000px;
       overflow: hidden;
@@ -219,6 +211,12 @@ export default {
       padding: 2rem;
       user-select: none;
       background-color: var(--neutral-light-gray);
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1440px) {
+    .testimonials {
+      transform: translateX(1.3rem);
     }
   }
 </style>
