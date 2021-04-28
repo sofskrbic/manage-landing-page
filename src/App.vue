@@ -82,7 +82,7 @@ export default {
 body {
   height: 100vh;
   width: 100%;
-  /* overflow-x: hidden; */
+  overflow-x: hidden;
   font-size: var(--fs-body-copy);
   font-family: var(--ff-defaul);
   font-weight: var(--fw-regular);
@@ -165,5 +165,11 @@ p {
     background: url(./assets/bg-tablet-pattern.svg) no-repeat bottom -18rem left -25rem;
     background-size: 50%;
   }
+}
+
+@media (min-width: 768px) and (max-width: 1440px) {
+    .container {
+      padding: 2.5rem 3rem;
+    }
 }
 </style>
