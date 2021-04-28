@@ -64,4 +64,14 @@ export default {
       width: 75%;
     }
   }
+
+  @media (min-width: 768px) and (max-width: 1440px) {
+    .container {
+      padding-inline: 1.8rem;
+    }
+
+    .subheading {
+      padding-inline: 3rem;
+    }
+  }
 </style>
